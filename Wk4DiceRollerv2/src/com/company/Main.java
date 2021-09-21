@@ -111,29 +111,36 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter the number of dice and sides you want to roll.\n" +
-                "Please enter in the format '2d6' which is 2 6 sided dice: " );
+                "Please enter in the format '2d6' which is 2 6 sided dice\n" +
+                "Enter 'n' when you want to exit program: " );
         String userValue = input.nextLine();
-        String[] arrOfStr = userValue.split("d",3);
-        int numSides = Integer.parseInt(arrOfStr[1]);
-        int numOfDice = Integer.parseInt(arrOfStr[0]);
-        int total = 0;
+        while(!"n".equals(userValue) && !"N".equals(userValue) )
+        {
+            String[] arrOfStr = userValue.split("d", 3);
+            int numSides = Integer.parseInt(arrOfStr[1]);
+            int numOfDice = Integer.parseInt(arrOfStr[0]);
+            int total = 0;
 
-        int[] dice = new int[numOfDice];
+            int[] dice = new int[numOfDice];
 
-        for (int i = 0; i < numOfDice; i++) {
-            Random rand = new Random();
-            dice[i] = rand.nextInt(numSides) + 1;
+            for (int i = 0; i < numOfDice; i++) {
+                Random rand = new Random();
+                dice[i] = rand.nextInt(numSides) + 1;
+            }
+
+            //for(int i = 0; i < 5; i++)
+            String msg = "";
+            for (int die : dice) {
+                msg += "You rolled a " + die + " on a " + numSides + " sided dice"
+                        + "\n";
+                System.out.println(msg);
+                total += die;
+            }
+            //System.out.println(msg);
+            System.out.println("Your total is " + total);
+            System.out.println("Please enter the number of dice and sides you want to roll.\n" +
+                    "Please enter in the format '2d6' which is 2 6 sided dice: " );
+            userValue = input.nextLine();
         }
-
-        //for(int i = 0; i < 5; i++)
-        String msg = "";
-        for(int die: dice){
-            msg += "You rolled a " + die + " on a " + numSides + " sided dice"
-                    + "\n";
-            System.out.println(msg);
-            total += die;
-        }
-        //System.out.println(msg);
-        System.out.println("Your total is " + total);
     }
 }
